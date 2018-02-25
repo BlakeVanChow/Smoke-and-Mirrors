@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Smoke & Mirrors</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div class="headline">
+        <canvas id="title"></canvas>
+        <input class="slider" id="slider_0" type="range" min="3" max="97" value="5">
+    </div>
+    <div class="narrative">
+        <canvas id="narrative"></canvas>
+    </div>
+    <div class="exhibition">
+        <div class="g1">
+            <canvas class="image" id="image_1"></canvas>
+            <canvas class="caption" id="caption_1"></canvas>
+            <input class="slider" id="slider_1" type="range" min="4" max="100" value="2">
+        </div>
+
+        <div class="g2">
+            <canvas class="image" id="image_2"></canvas>
+            <canvas class="caption" id="caption_2"></canvas>
+            <input class="slider" id="slider_2" type="range" min="1.5" max="100" value="2">
+        </div>
+
+        <div class="g3">
+            <canvas class="image" id="image_3"></canvas>
+            <canvas class="caption" id="caption_3"></canvas>
+            <input class="slider" id="slider_3" type="range" min="3" max="100" value="2">
+        </div>
+
+        <div class="g4">
+            <canvas class="image" id="image_4"></canvas>
+            <canvas class="caption" id="caption_4"></canvas>
+            <input class="slider" id="slider_4" type="range" min="5" max="100" value="2">
+        </div>
+
+        <div class="g5">
+            <canvas class="image" id="image_5"></canvas>
+            <canvas class="caption" id="caption_5"></canvas>
+            <input class="slider" id="slider_5" type="range" min="1.5" max="100" value="2">
+        </div>
+    </div>
+    <!-- -------------- titel & narrative ----------------- -->
+    <script type="text/javascript">
+    var ctx00 = title.getContext('2d'),
+        ctx01 = narrative.getContext('2d'),
+        img00 = new Image(),
+        img01 = new Image(),
+        play = false;
+
+
+
+    // turn off image smoothing - this will give the pixelated effect
+    ctx00.mozImageSmoothingEnabled = false;
+    ctx00.webkitImageSmoothingEnabled = false;
+    ctx00.imageSmoothingEnabled = false;
+
+    ctx01.mozImageSmoothingEnabled = false;
+    ctx01.webkitImageSmoothingEnabled = false;
+    ctx01.imageSmoothingEnabled = false;
+
+
+
+
+    // wait until image is actually available
+    img00.onload = pixelate0;
+    img01.onload = pixelate0;
+
+
+
+    // some image, we are not struck with CORS restrictions as we
+    // do not use pixel buffer to pixelate1, so any image will do
+    img00.src = 'img/title.png';
+    img01.src = 'img/narrative.png';
+
+
+    // MAIN function
+    function pixelate0(v) {
+
+        // if in play mode use that value, else use slider value
+        var size00 = (play ? v : (101 - slider_0.value)) * 0.01,
+            size01 = (play ? v : slider_0.value) * 0.01,
+
+
+
+            // cache scaled width and height
+            w00 = title.width * size00,
+            h00 = title.height * size00,
+            w01 = narrative.width * size01,
+            h01 = narrative.height * size01;
+
+
+
+        // draw original image to the scaled size
+        ctx00.drawImage(img00, 0, 0, w00, h00);
+        ctx01.drawImage(img01, 0, 0, w01, h01);
+
+
+
+        // then draw that scaled image thumb back to fill images
+        // As smoothing is off the result will be pixelated
+
+        ctx00.drawImage(title, 0, 0, w00, h00, 0, 0, title.width, title.height);
+        ctx01.drawImage(narrative, 0, 0, w01, h01, 0, 0, narrative.width, narrative.height);
+    }
+
+
+    // event listeneners for slider and button
+    slider_0.addEventListener('change', pixelate0, false);
+    </script>
+    <!-- -------------------- image_1 -------------------- -->
+    <script type="text/javascript">
+    var ctx1 = image_1.getContext('2d'),
+        ctx2 = caption_1.getContext('2d'),
+        img1 = new Image(),
+        img2 = new Image(),
+        play = false;
+
+
+
+    // turn off image smoothing - this will give the pixelated effect
+    ctx1.mozImageSmoothingEnabled = false;
+    ctx1.webkitImageSmoothingEnabled = false;
+    ctx1.imageSmoothingEnabled = false;
+
+    ctx2.mozImageSmoothingEnabled = false;
+    ctx2.webkitImageSmoothingEnabled = false;
+    ctx2.imageSmoothingEnabled = false;
+
+
+
+
+    // wait until image is actually available
+    img1.onload = pixelate1;
+    img2.onload = pixelate1;
+
+
+
+    // some image, we are not struck with CORS restrictions as we
+    // do not use pixel buffer to pixelate1, so any image will do
+    img1.src = 'img/img01.png';
+    img2.src = 'img/cap01.png';
+
+
+    // MAIN function
+    function pixelate1(v) {
+
+        // if in play mode use that value, else use slider value
+        var size1 = (play ? v : (101 - slider_1.value)) * 0.01,
+            size2 = (play ? v : slider_1.value) * 0.01,
+
+
+
+            // cache scaled width and height
+            w1 = image_1.width * size1,
+            h1 = image_1.height * size1,
+            w2 = caption_1.width * size2,
+            h2 = caption_1.height * size2;
+
+
+
+        // draw original image to the scaled size
+        ctx1.drawImage(img1, 0, 0, w1, h1);
+        ctx2.drawImage(img2, 0, 0, w2, h2);
+
+
+
+        // then draw that scaled image thumb back to fill images
+        // As smoothing is off the result will be pixelated
+
+        ctx1.drawImage(image_1, 0, 0, w1, h1, 0, 0, image_1.width, image_1.height);
+        ctx2.drawImage(caption_1, 0, 0, w2, h2, 0, 0, caption_1.width, caption_1.height);
+    }
+
+
+    // event listeneners for slider and button
+    slider_1.addEventListener('change', pixelate1, false);
+    </script>
+    <!-- -------------------- image_2--------------------- -->
+    <script type="text/javascript">
+    // (C) Ken Fyrstenberg Nilsen, Abdias Software, CC3.0-attribute.
+    var
+
+        ctx3 = image_2.getContext('2d'),
+        ctx4 = caption_2.getContext('2d'),
+        img3 = new Image(),
+        img4 = new Image(),
+        play = false;
+
+    // turn off image smoothing - this will give the pixelated effect
+
+    ctx3.mozImageSmoothingEnabled = false;
+    ctx3.webkitImageSmoothingEnabled = false;
+    ctx3.imageSmoothingEnabled = false;
+
+    ctx4.mozImageSmoothingEnabled = false;
+    ctx4.webkitImageSmoothingEnabled = false;
+    ctx4.imageSmoothingEnabled = false;
+
+
+    // wait until image is actually available
+
+    img3.onload = pixelate2;
+    img4.onload = pixelate2;
+
+
+    // some image, we are not struck with CORS restrictions as we
+    // do not use pixel buffer to pixelate, so any image will do
+
+    img3.src = 'img/img02.png';
+    img4.src = 'img/cap02.png';
+
+    // MAIN function
+    function pixelate2(v) {
+
+        // if in play mode use that value, else use slider value
+        var
+
+            size3 = (play ? v : (101 - slider_2.value)) * 0.01,
+            size4 = (play ? v : slider_2.value) * 0.01,
+
+            // cache scaled width and height
+
+
+            w3 = image_2.width * size3,
+            h3 = image_2.height * size3,
+            w4 = caption_2.width * size4,
+            h4 = caption_2.height * size4;
+
+        // draw original image to the scaled size
+
+
+        ctx3.drawImage(img3, 0, 0, w3, h3);
+        ctx4.drawImage(img4, 0, 0, w4, h4);
+
+        // then draw that scaled image thumb back to fill images
+        // As smoothing is off the result will be pixelate2d
+
+
+
+        ctx3.drawImage(image_2, 0, 0, w3, h3, 0, 0, image_2.width, image_2.height);
+        ctx4.drawImage(caption_2, 0, 0, w4, h4, 0, 0, caption_2.width, caption_2.height);
+    }
+
+
+
+    // event listeneners for slider and button
+
+    slider_2.addEventListener('change', pixelate2, false);
+    </script>
+    <!-- -------------------- image_3--------------------- -->
+    <script type="text/javascript">
+    // (C) Ken Fyrstenberg Nilsen, Abdias Software, CC3.0-attribute.
+    var
+
+        ctx5 = image_3.getContext('2d'),
+        ctx6 = caption_3.getContext('2d'),
+        img5 = new Image(),
+        img6 = new Image(),
+        play = false;
+
+    // turn off image smoothing - this will give the pixelated effect
+
+    ctx5.mozImageSmoothingEnabled = false;
+    ctx5.webkitImageSmoothingEnabled = false;
+    ctx5.imageSmoothingEnabled = false;
+
+    ctx6.mozImageSmoothingEnabled = false;
+    ctx6.webkitImageSmoothingEnabled = false;
+    ctx6.imageSmoothingEnabled = false;
+
+
+    // wait until image is actually available
+
+    img5.onload = pixelate3;
+    img6.onload = pixelate3;
+
+
+    // some image, we are not struck with CORS restrictions as we
+    // do not use pixel buffer to pixelate, so any image will do
+
+    img5.src = 'img/img03.png';
+    img6.src = 'img/cap03.png';
+
+    // MAIN function
+    function pixelate3(v) {
+
+        // if in play mode use that value, else use slider value
+        var
+
+            size5 = (play ? v : (101 - slider_3.value)) * 0.01,
+            size6 = (play ? v : slider_3.value) * 0.01,
+
+            // cache scaled width and height
+
+
+            w5 = image_3.width * size5,
+            h5 = image_3.height * size5,
+            w6 = caption_3.width * size6,
+            h6 = caption_3.height * size6;
+
+        // draw original image to the scaled size
+
+
+        ctx5.drawImage(img5, 0, 0, w5, h5);
+        ctx6.drawImage(img6, 0, 0, w6, h6);
+
+        // then draw that scaled image thumb back to fill images
+        // As smoothing is off the result will be pixelate3d
+
+
+
+        ctx5.drawImage(image_3, 0, 0, w5, h5, 0, 0, image_3.width, image_3.height);
+        ctx6.drawImage(caption_3, 0, 0, w6, h6, 0, 0, caption_3.width, caption_3.height);
+    }
+
+
+
+    // event listeneners for slider and button
+
+    slider_3.addEventListener('change', pixelate3, false);
+    </script>
+    <!-- -------------------- image_4--------------------- -->
+    <script type="text/javascript">
+    // (C) Ken Fyrstenberg Nilsen, Abdias Software, CC3.0-attribute.
+    var
+
+        ctx7 = image_4.getContext('2d'),
+        ctx8 = caption_4.getContext('2d'),
+        img7 = new Image(),
+        img8 = new Image(),
+        play = false;
+
+    // turn off image smoothing - this will give the pixelated effect
+
+    ctx7.mozImageSmoothingEnabled = false;
+    ctx7.webkitImageSmoothingEnabled = false;
+    ctx7.imageSmoothingEnabled = false;
+
+    ctx8.mozImageSmoothingEnabled = false;
+    ctx8.webkitImageSmoothingEnabled = false;
+    ctx8.imageSmoothingEnabled = false;
+
+
+    // wait until image is actually available
+
+    img7.onload = pixelate4;
+    img8.onload = pixelate4;
+
+
+    // some image, we are not struck with CORS restrictions as we
+    // do not use pixel buffer to pixelate, so any image will do
+
+    img7.src = 'img/img04.png';
+    img8.src = 'img/cap04.png';
+
+    // MAIN function
+    function pixelate4(v) {
+
+        // if in play mode use that value, else use slider value
+        var
+
+            size7 = (play ? v : (101 - slider_4.value)) * 0.01,
+            size8 = (play ? v : slider_4.value) * 0.01,
+
+            // cache scaled width and height
+
+
+            w7 = image_4.width * size7,
+            h7 = image_4.height * size7,
+            w8 = caption_4.width * size8,
+            h8 = caption_4.height * size8;
+
+        // draw original image to the scaled size
+
+
+        ctx7.drawImage(img7, 0, 0, w7, h7);
+        ctx8.drawImage(img8, 0, 0, w8, h8);
+
+        // then draw that scaled image thumb back to fill images
+        // As smoothing is off the result will be pixelated
+
+
+
+        ctx7.drawImage(image_4, 0, 0, w7, h7, 0, 0, image_4.width, image_3.height);
+        ctx8.drawImage(caption_4, 0, 0, w8, h8, 0, 0, caption_4.width, caption_4.height);
+    }
+
+
+
+    // event listeneners for slider and button
+
+    slider_4.addEventListener('change', pixelate4, false);
+    </script>
+    <!-- ---------------------image_5------------------- -->
+    <script type="text/javascript">
+    // (C) Ken Fyrstenberg Nilsen, Abdias Software, CC3.0-attribute.
+    var
+
+        ctx9 = image_5.getContext('2d'),
+        ctx10 = caption_5.getContext('2d'),
+        img9 = new Image(),
+        img10 = new Image(),
+        play = false;
+
+    // turn off image smoothing - this will give the pixelated effect
+
+    ctx9.mozImageSmoothingEnabled = false;
+    ctx9.webkitImageSmoothingEnabled = false;
+    ctx9.imageSmoothingEnabled = false;
+
+    ctx10.mozImageSmoothingEnabled = false;
+    ctx10.webkitImageSmoothingEnabled = false;
+    ctx10.imageSmoothingEnabled = false;
+
+
+    // wait until image is actually available
+
+    img9.onload = pixelate5;
+    img10.onload = pixelate5;
+
+
+    // some image, we are not struck with CORS restrictions as we
+    // do not use pixel buffer to pixelate, so any image will do
+
+    img9.src = 'img/img05.png';
+    img10.src = 'img/cap05.png';
+
+    // MAIN function
+    function pixelate5(v) {
+
+        // if in play mode use that value, else use slider value
+        var
+
+            size9 = (play ? v : (101 - slider_5.value)) * 0.01,
+            size10 = (play ? v : slider_5.value) * 0.01,
+
+            // cache scaled width and height
+
+
+            w9 = image_5.width * size9,
+            h9 = image_5.height * size9,
+            w10 = caption_5.width * size10,
+            h10 = caption_5.height * size10;
+
+        // draw original image to the scaled size
+
+
+        ctx9.drawImage(img9, 0, 0, w9, h9);
+        ctx10.drawImage(img10, 0, 0, w10, h10);
+
+        // then draw that scaled image thumb back to fill images
+        // As smoothing is off the result will be pixelated
+
+
+
+        ctx9.drawImage(image_5, 0, 0, w9, h9, 0, 0, image_5.width, image_5.height);
+        ctx10.drawImage(caption_5, 0, 0, w10, h10, 0, 0, caption_5.width, caption_5.height);
+    }
+
+
+
+    // event listeneners for slider and button
+
+    slider_5.addEventListener('change', pixelate5, false);
+    </script>
+</body>
+
+</html>
