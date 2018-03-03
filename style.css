@@ -228,7 +228,7 @@ input[type=range]::-webkit-slider-thumb {
     
     top:0px;
     left:50px;
-    width:107%;
+    width:112%;
     transform: rotate(70deg);
     transform-origin: top left;
 }
@@ -261,7 +261,7 @@ input[type=range]::-webkit-slider-thumb {
 
 
 #slider_1 {
-    width:92%;
+    width:97%;
     left:65%;
     top:20%;
     transform: rotate(100deg);
@@ -313,7 +313,7 @@ input[type=range]::-webkit-slider-thumb {
     
     transform: rotate(65deg);
 
-    width:96%;
+    width:101%;
     left:50%;
     top:40%;
     
@@ -361,7 +361,7 @@ input[type=range]::-webkit-slider-thumb {
     transform: rotate(80deg);
 
 
-    width:68%;
+    width:73%;
     left:50%;
     top:50%;
     
@@ -404,7 +404,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 #slider_4 {
-    width:60%;
+    width:65%;
     left:57%;
     top:58%;
     
@@ -444,7 +444,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 #slider_5 {
-    width:120%;
+    width:125%;
     left:32%;
     top:5%;
     
